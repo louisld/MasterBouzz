@@ -13,7 +13,7 @@ public class Main {
 		for(int i1=0;i1<5;i1++){
 			System.out.println(colorsRandom[i1].toString());
 		}
-		MainWindow mainWindow = new MainWindow();
+		HelpWindow helpWindow = new HelpWindow();
 	}
 	
 	public static String couleursGagnantes(){
