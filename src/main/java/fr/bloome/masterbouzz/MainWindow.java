@@ -7,10 +7,12 @@ import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 
 public class MainWindow extends JFrame {
 
@@ -24,17 +26,19 @@ public class MainWindow extends JFrame {
 		this.setTitle("Masterbouzz");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(420, 350);
+		this.setSize(500, 350);
 		this.setResizable(false);
-		GridLayout l = new GridLayout(0, 5);
+		GridLayout l = new GridLayout(0, 6);
 		l.setHgap(0);
 		l.setVgap(0);
 		this.getContentPane().setLayout(new BorderLayout());
 		panel1.setLayout(l);
 		JPanel panel2 = new JPanel();
+		JPanel wrapper = new JPanel(new BorderLayout());
+		wrapper.add(panel1, BorderLayout.NORTH);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setViewportView(panel1);
+		scroll.setViewportView(wrapper);
 		this.getContentPane().add(scroll, BorderLayout.CENTER);
 		this.getContentPane().add(panel2, BorderLayout.SOUTH);
 		JButton bleu = new JButton("Bleu");
@@ -99,10 +103,20 @@ public class MainWindow extends JFrame {
 				}
 			}
 			if(valide == 5){
-				JOptionPane.showMessageDialog(null, "La combinaison gagnante était " + Main.couleursGagnantes(),"Vous avez gagné !!! \\o/", JOptionPane.INFORMATION_MESSAGE);
+				JLabel labelFromager = new JLabel("\\o/");
+				labelFromager.setFont(labelFromager.getFont().deriveFont(32F));
+				labelFromager.setHorizontalAlignment(SwingConstants.CENTER);
+				panel1.add(labelFromager);
+				panel1.revalidate();
+				panel1.repaint();
 			}
 			else{
-				JOptionPane.showMessageDialog(null, "Vous avez " + valide + " couleurs bonnes", "Raté", JOptionPane.ERROR_MESSAGE);
+				JLabel labelFromager = new JLabel(valide + "");
+				labelFromager.setFont(labelFromager.getFont().deriveFont(32F));
+				labelFromager.setHorizontalAlignment(SwingConstants.CENTER);
+				panel1.add(labelFromager);
+				panel1.revalidate();
+				panel1.repaint();
 			}
 		}
 	}
