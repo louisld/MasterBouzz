@@ -21,6 +21,8 @@ public class MainWindow extends JFrame {
 	private Colors[] buffer = new Colors[5];
 	private JPanel panel1 = new JPanel();
 	private JScrollPane scroll = new JScrollPane();
+	private JPanel panel3 = new JPanel();
+	private JPanel panel2 = new JPanel();
 
 	MainWindow() {
 		this.setTitle("Masterbouzz");
@@ -33,7 +35,13 @@ public class MainWindow extends JFrame {
 		l.setVgap(0);
 		this.getContentPane().setLayout(new BorderLayout());
 		panel1.setLayout(l);
-		JPanel panel2 = new JPanel();
+		JButton reset = new JButton("Relancer une partie !");
+		panel3.setLayout(new BorderLayout());
+		panel3.add(reset, BorderLayout.WEST);
+		reset.addActionListener(e -> {
+			HelpWindow helpWindow = new HelpWindow();
+			this.dispose();
+		});
 		JPanel wrapper = new JPanel(new BorderLayout());
 		wrapper.add(panel1, BorderLayout.NORTH);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -106,9 +114,12 @@ public class MainWindow extends JFrame {
 				JLabel labelFromager = new JLabel("\\o/");
 				labelFromager.setFont(labelFromager.getFont().deriveFont(32F));
 				labelFromager.setHorizontalAlignment(SwingConstants.CENTER);
+				this.getContentPane().remove(panel2);
+				panel3.add(new JLabel("Vous avez réussi en " + line + " coup(s)"), BorderLayout.EAST);
+				this.getContentPane().add(panel3, BorderLayout.SOUTH);
 				panel1.add(labelFromager);
-				panel1.revalidate();
-				panel1.repaint();
+				this.getContentPane().revalidate();
+				this.getContentPane().repaint();
 			}
 			else{
 				JLabel labelFromager = new JLabel(valide + "");
